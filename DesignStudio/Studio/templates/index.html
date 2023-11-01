@@ -1,0 +1,19 @@
+{% extends "basePage.html" %}
+
+{% block content %}
+<h1>Local Library Home</h1>
+
+
+<h2>Dynamic content</h2>
+
+<p>The library has the following record counts:</p>
+<ul>
+    <li><h1>Title: {{ Applications_title }}</h1></li>
+    <li><img src="{{MEDIA_URL}}{{ Forest.jpg }}" alt="продукт"></li>
+    <li><p><strong>Summary:</strong> {{ Applications_description }}</p></li>
+    <li><p><strong>Language:</strong> {{ Applications_category }}</p></li>
+</ul>
+
+
+
+{% endblock %}
