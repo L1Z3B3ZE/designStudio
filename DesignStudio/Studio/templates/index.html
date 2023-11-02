@@ -2,16 +2,22 @@
 {%load static%}
 {% block content %}
 <h1>Дизайн-студия</h1>
-
 <h2>Последние выполненные заявки:</h2>
+
+<div>
+    {%if applications%}
     {% for i in applications %}
+    <div>
         <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
         <p> <b>Название: </b>{{ i.application_title }} </p>
         <p> <b>Категория: </b>{{i.category}} </p>
-
         <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}" width="200px" height="200px"/> </p>
-        <br><br><br>
+    </div>
     {% endfor %}
+    {% else %}
+    <p> Нет заявок </p>
+    {% endif %}
+</div>
 
 <p> <b>Количество заявок, находящихся в статусе «Принято в работу»: </b>{{num_AcceptedForWork}} </p>
 
