@@ -124,9 +124,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'Studio.AdvUser'
+
 
 runserver.default_port = "8080"
+runserver.default_addr = "localhost"
 
 LOGIN_REDIRECT_URL = '/'
 
-MEDIA_URL = '/media/'

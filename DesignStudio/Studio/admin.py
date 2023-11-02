@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Applications, Category
+from .models import *
 
-# Register your models here.
-
-
+admin.site.register(AdvUser)
+admin.site.register(Application)
 admin.site.register(Category)
 
-@admin.register(Applications)
-class ApplicationsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'category')
+
+#@admin.register(Application)
+#class ApplicationsAdmin(admin.ModelAdmin):
+    #list_display = ('title', 'description', 'category')

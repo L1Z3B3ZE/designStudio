@@ -27,8 +27,6 @@
                 {% if user.is_authenticated %}
                 <li>Пользователь: {{ user.get_username }}</li>
 
-                <li><a href="">Мои заказы</a></li>
-
                 <li><a href="{% url 'logout' %}?next={{ request.path }}">Выход</a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}?next={{ request.path }}">Вход</a></li>
@@ -41,7 +39,7 @@
             <ul class="sidebar-nav">
                 <li>Заказы</li>
                 {% if perms.catalog.can_mark_returned %}
-                <li><a href="">Все заказы</a></li>
+                <li><a href="">Все заявки</a></li>
                 {% endif %}
             </ul>
             {% endif %}

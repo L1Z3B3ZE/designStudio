@@ -1,18 +1,22 @@
 {% extends "basePage.html" %}
-
+{%load static%}
 {% block content %}
-<h1>Local Library Home</h1>
+<h1>Дизайн-студия</h1>
 
 
-<h2>Dynamic content</h2>
+    {% for i in applications %}
+        <p> <b>Название: </b>{{ i.application_title }} </p>
+        <p> <b>Категория: </b>{{i.category}} </p>
+        <p> <b>Описание: </b> {{ i.description }} </p>
+        <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}"/> </p>
+        <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
+        <br><br><br>
+    {% endfor %}
 
-<p>The library has the following record counts:</p>
-<ul>
-    <li><h1>Title: {{ Applications_title }}</h1></li>
-    <li><img src="{{MEDIA_URL}}{{ Forest.jpg }}" alt="продукт"></li>
-    <li><p><strong>Summary:</strong> {{ Applications_description }}</p></li>
-    <li><p><strong>Language:</strong> {{ Applications_category }}</p></li>
-</ul>
+
+
+
+
 
 
 

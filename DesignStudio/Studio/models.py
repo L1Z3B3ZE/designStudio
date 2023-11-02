@@ -1,24 +1,17 @@
 from django.db import models
-from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import FileExtensionValidator
+from datetime import datetime
 
 
-class Author(models.Model):
-    """Model representing an author."""
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('died', null=True, blank=True)
+class AdvUser(AbstractUser):
+   name = models.CharField(max_length=250, verbose_name="ФИО", help_text="Только кириллические буквы, дефис и пробелы")
+   username = models.CharField(max_length=35, verbose_name="Логин", unique=True, help_text="Только латиница и дефис, уникальный")
+   is_activated = models.BooleanField(default=True, db_index=True,
+                                      verbose_name='Согласие с правилами регистрации')
 
-    class Meta:
-        ordering = ['last_name', 'first_name']
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('author-detail', args=[str(self.id)])
-
-    def __str__(self):
-        """String for representing the Model object."""
-        return '{0}, {1}'.format(self.last_name, self.first_name)
+class Meta(AbstractUser.Meta):
+   pass
 
 
 class Category(models.Model):
@@ -29,8 +22,38 @@ class Category(models.Model):
         return self.name
 
 
-class Applications(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=1000, default='something')
-    category = models.ForeignKey('category', on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(upload_to='')
+
+class Application(models.Model):
+    application_title = models.CharField(max_length=254, verbose_name="Название")
+    description = models.TextField(verbose_name="Описание")
+    REQUEST_CATEGORY = (
+        ('bigApartment', 'bigApartment'),
+        ('Apartment', 'bigApartment'),
+        ('smallApartment', 'smallApartment'),
+    )
+    category = models.CharField(
+        max_length=14,
+        choices=REQUEST_CATEGORY,
+        blank=True,
+        default='a',
+        verbose_name="Категория")
+    photo_of_room = models.ImageField(max_length=254, upload_to="media/", verbose_name="Фотография",
+                                      help_text="Разрешается формата файла только jpg, jpeg, png, bmp",
+                                      validators=[
+                                          FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp'])])
+    date_create = models.DateField(default=datetime.now(), verbose_name="Дата создания")
+    time_create = models.TimeField(default=datetime.now(), verbose_name="Время создания")
+    REQUEST_STATUS = (
+        ('Новая', 'Новая'),
+        ('Принято в работу', 'Принято в работу'),
+        ('«Выполнено»', '«Выполнено»'),
+    )
+    status = models.CharField(
+        max_length=16,
+        choices=REQUEST_STATUS,
+        default='Новая',
+        blank=True,
+        verbose_name="Статус")
+
+    def __str__(self):
+        return self.application_title
