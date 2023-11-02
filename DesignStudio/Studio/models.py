@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
@@ -13,13 +14,6 @@ class AdvUser(AbstractUser):
 class Meta(AbstractUser.Meta):
    pass
 
-
-class Category(models.Model):
-    name = models.CharField(max_length=200,
-                            help_text="Введите категорию")
-
-    def __str__(self):
-        return self.name
 
 
 
@@ -37,11 +31,18 @@ class Application(models.Model):
         blank=True,
         default='a',
         verbose_name="Категория")
+
+    def validate_image(fieldfile_obj):
+        filesize = fieldfile_obj.file.size
+        megabyte_limit = 2.0
+        if filesize > megabyte_limit  * 1024 * 1024:
+            raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
     photo_of_room = models.ImageField(max_length=254, upload_to="media/", verbose_name="Фотография",
                                       help_text="Разрешается формата файла только jpg, jpeg, png, bmp",
                                       validators=[
-                                          FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp'])])
-    date_create = models.DateField(default=datetime.now(), verbose_name="Дата создания")
+                                          FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp']),
+                                        validate_image])
+    #date_create = models.DateField(default=datetime.now(), verbose_name="Дата создания")
     time_create = models.TimeField(default=datetime.now(), verbose_name="Время создания")
     REQUEST_STATUS = (
         ('Новая', 'Новая'),
