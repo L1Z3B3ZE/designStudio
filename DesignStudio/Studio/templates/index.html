@@ -3,17 +3,17 @@
 {% block content %}
 <h1>Дизайн-студия</h1>
 
-
+<h2>Последние выполненные заявки:</h2>
     {% for i in applications %}
+        <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
         <p> <b>Название: </b>{{ i.application_title }} </p>
         <p> <b>Категория: </b>{{i.category}} </p>
-        <p> <b>Описание: </b> {{ i.description }} </p>
-        <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}"/> </p>
-        <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
+
+        <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}" width="200px" height="200px"/> </p>
         <br><br><br>
     {% endfor %}
 
-
+<p> <b>Количество заявок, находящихся в статусе «Принято в работу»: </b>{{num_AcceptedForWork}} </p>
 
 
 

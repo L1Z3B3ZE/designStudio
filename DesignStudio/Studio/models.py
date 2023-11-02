@@ -22,11 +22,11 @@ class Application(models.Model):
     description = models.TextField(verbose_name="Описание")
     REQUEST_CATEGORY = (
         ('bigApartment', 'bigApartment'),
-        ('Apartment', 'bigApartment'),
+        ('mediumApartment', 'mediumApartment'),
         ('smallApartment', 'smallApartment'),
     )
     category = models.CharField(
-        max_length=14,
+        max_length=15,
         choices=REQUEST_CATEGORY,
         blank=True,
         default='a',
@@ -42,12 +42,12 @@ class Application(models.Model):
                                       validators=[
                                           FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp']),
                                         validate_image])
-    #date_create = models.DateField(default=datetime.now(), verbose_name="Дата создания")
-    time_create = models.TimeField(default=datetime.now(), verbose_name="Время создания")
+    date_create = models.DateField(default=datetime.now, verbose_name="Дата создания")
+    time_create = models.TimeField(default=datetime.now, verbose_name="Время создания")
     REQUEST_STATUS = (
         ('Новая', 'Новая'),
         ('Принято в работу', 'Принято в работу'),
-        ('«Выполнено»', '«Выполнено»'),
+        ('Выполнено', 'Выполнено'),
     )
     status = models.CharField(
         max_length=16,
@@ -58,3 +58,5 @@ class Application(models.Model):
 
     def __str__(self):
         return self.application_title
+
+
