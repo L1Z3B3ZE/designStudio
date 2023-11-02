@@ -22,3 +22,4 @@ class RegisterUserForm(UserCreationForm):
         if AdvUser.objects.filter(username=username).exists():
             raise ValidationError("Пользователь с таким логином уже существует. ")
         return username
+
