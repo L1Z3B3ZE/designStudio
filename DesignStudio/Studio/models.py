@@ -21,9 +21,9 @@ class Application(models.Model):
     application_title = models.CharField(max_length=254, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
     REQUEST_CATEGORY = (
-        ('bigApartment', 'bigApartment'),
-        ('mediumApartment', 'mediumApartment'),
-        ('smallApartment', 'smallApartment'),
+        ('2D Design', '2D Design'),
+        ('3D Design', '3D Design'),
+        ('Sketch', 'Sketch'),
     )
     category = models.CharField(
         max_length=15,
