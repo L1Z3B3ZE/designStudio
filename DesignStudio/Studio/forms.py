@@ -23,3 +23,4 @@ class RegisterUserForm(UserCreationForm):
             raise ValidationError("Пользователь с таким логином уже существует. ")
         return username
 
+

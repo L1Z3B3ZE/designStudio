@@ -10,6 +10,9 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='register'),
     path('login/', BBLoginView.as_view(), name='login'),
     path('logout/', BBLogoutView.as_view(), name='logout'),
+    path('myapplications/', views.ApplicationsByUserListView.as_view(), name='my-applications'),
+    path('application/create/', views.ApplicationCreate.as_view(), name='application-create'),
+    path('application/<int:pk>/delete/', views.ApplicationDelete.as_view(), name='application-delete'),
 ]
 
 

@@ -24,8 +24,8 @@
             <ul class="sidebar-nav">
                 {% if user.is_authenticated %}
                 <li>Пользователь: {{ user.get_username }}</li>
-
-                <li><a href="{% url 'logout' %}?next={{ request.path }}">Выход</a></li>
+                <li><a href="{% url 'my-applications' %}">Мои заявки</a></li>
+                <li><a href="{% url 'logout' %}?next={% url 'login' %}">Выход</a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}?next={{ request.path }}">Вход</a></li>
                 <li><a href="{% url 'register' %}">Регистрация</a></li>

@@ -132,3 +132,4 @@ runserver.default_addr = "localhost"
 
 LOGIN_REDIRECT_URL = '/'
 
+

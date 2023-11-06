@@ -3,3 +3,8 @@
   padding: 0;
   list-style: none;
 }
+
+.my_application{
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
