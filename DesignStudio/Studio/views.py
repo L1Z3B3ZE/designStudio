@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from .forms import RegisterUserForm
 from .models import Application
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LogoutView
 from django.views.generic.edit import CreateView, DeleteView
 
@@ -52,8 +52,10 @@ class ApplicationsByUserListView(LoginRequiredMixin, generic.ListView):
         status = self.request.GET.get('status')  # получение параметра 'статус' из URL-запроса
         filter = Application.objects.filter(owner=self.request.user).order_by('-date_create', '-time_create')
         if status:
-            filter = Application.objects.filter(status=status)
+            filter = filter.filter(status=status)
         return filter
+
+
 
 class ApplicationCreate(LoginRequiredMixin, CreateView):
     model = Application
