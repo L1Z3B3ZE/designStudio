@@ -38,6 +38,7 @@
                 <li>Заказы</li>
                 {% if perms.catalog.can_mark_returned %}
                 <li><a href="{% url 'all-applications' %}">Все заявки</a></li>
+                <li><a href="{% url 'categories' %}">Категории</a></li>
                 {% endif %}
             </ul>
             {% endif %}
