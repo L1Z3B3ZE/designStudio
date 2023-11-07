@@ -142,3 +142,5 @@ class ChangeRequestStatusView(LoginRequiredMixin, UpdateView):
         form = ChangeRequestStatusForm(self.request.POST, self.request.FILES, instance=self.object)
         form.save()
         return super().form_valid(form)
+
+

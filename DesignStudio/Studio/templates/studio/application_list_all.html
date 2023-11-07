@@ -23,7 +23,7 @@
                 <p> <b>Категория: </b>{{i.category}} </p>
                 <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}" width="200px" height="200px"/> </p>
                 <p> <b>Статус: </b>{{i.status}} </p>
-                <a class="btn btn-primary mb-1" href="{% url 'application-change-status' i.id %}">Изменить статус</a>
+                <a class="btn btn-primary mb-1" href="">Изменить статус</a>
             </div>
         {% endfor %}
     </ul>

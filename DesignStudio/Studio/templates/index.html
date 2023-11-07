@@ -7,7 +7,7 @@
 <div>
     {%if applications%}
     {% for i in applications %}
-    <div>
+    <div class="application">
         <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
         <p> <b>Название: </b>{{ i.application_title }} </p>
         <p> <b>Категория: </b>{{i.category}} </p>
