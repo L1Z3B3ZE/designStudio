@@ -74,3 +74,11 @@ class ApplicationDelete(LoginRequiredMixin, DeleteView):
 
 
 
+class ApplicationsAllListView(LoginRequiredMixin, generic.ListView):
+    model = Application
+    template_name = 'studio/application_list_all.html'
+    paginate_by = 10
+    context_object_name = 'applications'
+
+    def get_queryset(self):
+        return Application.objects.order_by('-date_create', '-time_create')

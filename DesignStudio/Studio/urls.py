@@ -13,6 +13,7 @@ urlpatterns = [
     path('myapplications/', views.ApplicationsByUserListView.as_view(), name='my-applications'),
     path('application/create/', views.ApplicationCreate.as_view(), name='application-create'),
     path('application/<int:pk>/delete/', views.ApplicationDelete.as_view(), name='application-delete'),
+    path('allapplications/', views.ApplicationsAllListView.as_view(), name='all-applications'),
 ]
 
 

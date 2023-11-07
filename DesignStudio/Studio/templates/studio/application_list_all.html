@@ -1,0 +1,23 @@
+{% extends "basePage.html" %}
+
+{% block content %}
+    <h1>Все заявки</h1>
+
+    {% if applications %}
+    <ul>
+        {% for i in applications %}
+            <div class="application">
+                <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
+                <p> <b>Название: </b>{{ i.application_title }} </p>
+                <p> <b>Категория: </b>{{i.category}} </p>
+                <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}" width="200px" height="200px"/> </p>
+                <p> <b>Статус: </b>{{i.status}} </p>
+                <a href="">Изменить статус</a>
+            </div>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>нет заявок</p>
+    {% endif %}
+{% endblock %}
