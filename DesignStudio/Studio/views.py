@@ -83,6 +83,13 @@ class ApplicationsAllListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Application.objects.order_by('-date_create', '-time_create')
 
+    def get_queryset(self):
+        status = self.request.GET.get('status')  # получение параметра 'статус' из URL-запроса
+        filter = Application.objects.order_by('-date_create', '-time_create')
+        if status:
+            filter = filter.filter(status=status)
+        return filter
+
 
 class ViewCategory(ListView):
     model = Application

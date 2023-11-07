@@ -3,6 +3,17 @@
 {% block content %}
     <h1>Все заявки</h1>
 
+    <form>
+        <label for="status">Фильтр по статусу:</label>
+        <select name="status">
+              <option value="">Все</option>
+              <option value="Новая">Новая</option>
+              <option value="Принято в работу">Принято в работу</option>
+              <option value="Выполнено">Выполнено</option>
+        </select>
+    <input type="submit" value="Фильтровать">
+    </form>
+
     {% if applications %}
     <ul>
         {% for i in applications %}
