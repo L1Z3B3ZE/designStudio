@@ -25,7 +25,7 @@ class Category(models.Model):
 
 class Application(models.Model):
     application_title = models.CharField(max_length=254, verbose_name="Название")
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(max_length=1000, verbose_name="Описание")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def validate_image(fieldfile_obj):

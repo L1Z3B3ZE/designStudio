@@ -5,9 +5,10 @@ from django.views.generic import ListView
 from .forms import RegisterUserForm
 from .models import *
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .forms import *
 
 
 # Create your views here.
@@ -116,3 +117,28 @@ class CategoryDeleteView(LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
+
+
+class ChangeRequestStatusView(LoginRequiredMixin, UpdateView):
+    model = Application
+    form_class = ChangeRequestStatusForm
+    template_name = 'studio/application_change_status.html'
+    success_url = reverse_lazy('all-applications')
+    context_object_name = 'applications'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        print(self.request.FILES)
+        form = ChangeRequestStatusForm(self.request.POST, self.request.FILES, instance=self.object)
+        form.save()
+        return super().form_valid(form)

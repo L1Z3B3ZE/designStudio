@@ -17,6 +17,7 @@ urlpatterns = [
     path('categories/', views.ViewCategory.as_view(), name='categories'),
     path('category/new/', views.CategoryCreateView.as_view(), name='category_create'),
     path('category/<int:pk>/delete/', views.CategoryDeleteView.as_view(), name='category_delete'),
+    path('application/<int:pk>/change_status/', ChangeRequestStatusView.as_view(), name='application-change-status'),
 ]
 
 
