@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Мои заявки</h1>
-    <a href="{% url 'application-create' %}">Создать заявку</a>
+    <a class="btn btn-primary mb-1" href="{% url 'application-create' %}">Создать заявку</a>
 
 
     <form>
@@ -19,13 +19,13 @@
     {% if applications %}
     <ul>
         {% for i in applications %}
-    <div class="my_application">
+    <div class="application">
         <p> <b>Время создания: </b>  {{i.date_create}} -- {{i.time_create}}</p>
         <p> <b>Название: </b>{{ i.application_title }} </p>
         <p> <b>Категория: </b>{{i.category}} </p>
         <p> <b>Фотография: </b> <img src="{{i.photo_of_room.url}}" width="200px" height="200px"/> </p>
         <p> <b>Статус: </b>{{i.status}} </p>
-        <a href="{% url 'application-delete' i.id %}">Удалить заявку</a>
+        <a class="btn btn-primary mb-1" href="{% url 'application-delete' i.id %}">Удалить заявку</a>
     </div>
         {% endfor %}
     </ul>
