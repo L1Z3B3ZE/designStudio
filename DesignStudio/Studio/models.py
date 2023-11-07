@@ -15,22 +15,18 @@ class Meta(AbstractUser.Meta):
    pass
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Категория")
+
+    def __str__(self):
+        return self.name
+
 
 
 class Application(models.Model):
     application_title = models.CharField(max_length=254, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    REQUEST_CATEGORY = (
-        ('2D Design', '2D Design'),
-        ('3D Design', '3D Design'),
-        ('Sketch', 'Sketch'),
-    )
-    category = models.CharField(
-        max_length=15,
-        choices=REQUEST_CATEGORY,
-        blank=True,
-        default='a',
-        verbose_name="Категория")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def validate_image(fieldfile_obj):
         filesize = fieldfile_obj.file.size
